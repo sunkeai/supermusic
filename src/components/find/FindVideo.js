@@ -1,33 +1,65 @@
 // /personalized/privatecontent
 import React from 'react';
-import bindActionCreators from 'redux';
 import {connect} from 'react-redux';
 import findVideoCreate from "../../store/actionCreators/video/findVideo";
+import axios from "axios";
 
 class FindVideo extends React.Component{
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state={
-            videoIdArr:[]
-        }
+            videoIdArr:[],
+            videoUrlArr:[],
+            videoDoms:[],
+            num:-1,
+        };
+        this.findListCB=this.findListCB.bind(this)
     }
+     findListCB(result){
+         console.log(result);
+         result.forEach((v,i)=>{
+             console.log(v.type)
+             if(v.videoId){
+                 console.log(222,v.videoId);
+                 this.state.videoIdArr[i] = v.videoId
+             }
+         })
+        /*this.setState({
+            videoIdArr:result.map(v=>v.videoId)
+        });*/
+        let arr=[];
+        this.state.videoIdArr.forEach((v,i)=>{
+            console.log(v);
+            axios.get('http://swmonk.top:3000/video/url?id='+v).then(({data})=>{
+                arr[i]=data.urls[0].url;
+                console.log(data.urls[0].url)
+                this.setState({
+                    videoUrlArr:arr
+                })
+                // console.log(this.state.videoUrlArr)
+            })
+        })
+     }
     render(){
         return (
             <div style={{marginBottom: '40px'}}>
                 {
                     this.props.findVideoList.map((v, i) => {
-                        this.state.videoIdArr.unshift(v.videoId)
-                        // console.log(v.videoId);
-                        // console.log(this.state.videoIdArr)
                         return (
                             <div key={i} style={{margin: '10px 0'}}>
-                                <div style={{width: '100%'}} >
-                                    <video src='' controls="controls" poster={v.url}>
-                                        your browser does not support the video tag
+                                <div style={{width: '100%'}}  ref={'video'} >
+                                    <video src={this.state.videoUrlArr[i]} controls="controls" poster={v.picUrl} style={{width:'100%'}} onPlay={()=>{
+                                        if(this.state.num>=0){
+                                            this.state.videoDoms[this.state.num].pause();
+                                        }
+                                        this.setState({
+                                            num:i
+                                        })
+                                    }}>
                                     </video>
                                 </div>
                                 <div style={{margin: '10px 0'}}>
-                                    <div>{v.name}</div>
+                                    <div>{v.name}{i}</div>
                                 </div>
                             </div>
                         )
@@ -38,32 +70,35 @@ class FindVideo extends React.Component{
         );
     }
     componentDidMount() {
-        this.props.getFindVideo();
+        this.props.getFindVideo(this.findListCB);
     }
-    componentWillReceiveProps(nextProps){
-        // this.props.playFindVideo()
-        // console.log(666,this.state)
-        // console.log(777,this.state.videoIdArr);
+
+    componentWillUpdate(nextProps, nextState, nextContext){
+        let videoDoms=document.getElementsByTagName("video");
+        this.state.videoDoms=videoDoms;
+        // console.log(videoDoms.length)
+        // for(let i=0;i<videoDoms.length;i++){
+        //     // videoDoms[i].pause();
+        //     console.log(videoDoms[i].play)
+        // }
     }
 }
 function mapStateToProps(state){
-    console.log(state,77)
     return {
-        findVideoList: state.video.findVideo.findVideoList,
+        findVideoList: state.video.findVideo.findVideoList
     }
 }
 function mapDispatchToProps(dispatch){
     return {
-        getFindVideo(){
+        getFindVideo(cb){
             // console.log(11111111,this);
             // console.log(this.refs.videoId);
-            dispatch(findVideoCreate.getFindVideo())
-        },
-        // playFindVideo(){
-        //     dispatch(findVideoCreate.playFindVideo(this.state.videoIdArr))
-        // }
-
+            dispatch(findVideoCreate.getFindVideo(cb))
+        }
     }
 }
+
+
+
 
 export default connect(mapStateToProps,mapDispatchToProps)(FindVideo);

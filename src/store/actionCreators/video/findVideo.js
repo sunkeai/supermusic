@@ -8,11 +8,12 @@ export default{
             result
         }
     },
-    getFindVideo(){
+    getFindVideo(cb){
         return(dispatch)=>(
             axios.get('http://swmonk.top:3000/personalized/privatecontent')
                 .then(({data})=>{
                     dispatch(this.changeFindVideo(data.result))
+                    cb(data.result)
                 })
         )
     },
