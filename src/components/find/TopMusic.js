@@ -1,0 +1,75 @@
+import React from 'react';
+import {NavLink} from 'react-router-dom';
+import axios from 'axios';
+//推荐歌单的tit，点击跳转路由MusicList
+// import MusicList from '../../views/Find/MusicList'
+//推荐歌单下面的那6个，接口是/recommend/resource
+class TopMusic extends React.Component{
+    constructor(){
+        super();
+        this.state={
+            recommend:[],
+            listen:[]
+        }
+    }
+    componentWillMount() {
+        this.getTopMusicMenu.bind(this)();
+    }
+    getTopMusicMenu(){
+        axios.get("http://swmonk.top:3000/personalized")
+            .then(({data})=>{
+                for(let i=0;i<6;i++){
+                    this.setState({
+                        recommend:this.state.recommend.concat(data.result[i])
+                    },function(){
+                        this.state.recommend.map((v,i)=>{
+                            this.setState({
+                                listen:this.state.listen.concat(parseInt(v.playCount / 10000))
+                            })
+                        })
+                    })
+                }
+                console.log(this.state.recommend);
+                console.log(this.state.listen);
+            })
+    }
+    render(){
+        return(
+            <div>
+                <NavLink to={'/top/playlist/highquality'} exact style={{display:'block'}}>
+                    <div className='top-music-menu-tit'>
+                        推荐歌单
+                        <i className='iconfont'>&#xe63b;</i>
+                    </div>
+                </NavLink>
+                <div style={{overflow:'hidden'}}>
+                    <ul style={{width:'100%',overflow:'hidden'}}>
+                        {
+                            this.state.recommend.map((v,i)=>{
+                                return (
+                                    <li style={{width:'30%',float:'left',margin:'8px 6px',position:'relative'}} key={i}>
+                                        <NavLink to={
+                                            {
+                                                pathname:'/top/play/highquality',
+                                                state:{
+                                                    id:v.id
+                                                }
+                                            }
+                                        } key={i}>
+                                            <img src={v.picUrl} alt="" style={{width:'100%'}}/>
+                                            <p className='top-music-menu-name'>{v.name}</p>
+                                            <div style={{color:'#fff',position:'absolute',top:0,right:0}}>
+                                                <i className='iconfont'>&#xe640;</i>{this.state.listen[i]}万
+                                            </div>
+                                        </NavLink>
+                                    </li>
+                                )
+                            })
+                        }
+                    </ul>
+                </div>
+            </div>
+        )
+    }
+}
+export default TopMusic;
