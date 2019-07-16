@@ -146,7 +146,7 @@ footer  .b-bottom{
     color:#000;
 }
 
-/*person页的推荐歌单*/
+/*person页的推荐歌单模块*/
 
 .top-music-menu-name{
     width: 100%;
@@ -172,6 +172,50 @@ footer  .b-bottom{
 .top-music-menu-tit i{
     margin-left:10px;
     color:#666;
+}
+
+/*精品歌单列表页*/
+.Top-Music-Menu-top{
+    height:40px;
+    display: flex;
+    justify-content: space-between;
+    background:#C20C0C;
+    line-height:40px;
+    color:#fff;
+}
+
+.Top-Music-Menu-filter{
+    filter:blur(30px);
+    width:100%;
+}
+.Top-Music-Menu-filter img{
+    width:100%;
+}
+
+.Top-Music-Menu-tit{
+    position:absolute;
+    top:20px;
+    left:0;
+}
+.Top-Music-Menu-tit img{
+    height:25%;
+    width:25%;
+    margin:10px;
+}
+.Top-Music-Menu-All{
+    display: flex;
+    justify-content: space-between;
+    margin:15px 5px;
+}
+.Top-Music-Menu-All>div:nth-child(1){
+    border:1px solid #999;
+    border-radius: 15px;
+    padding:3px 8px;
+    display: inline-block;
+}
+.Top-Music-Menu-All div:nth-child(2) div {
+    float: left;
+    margin: 0 10px;
 }
 /***********************************************帐号页面*********************************/
 .account-top{

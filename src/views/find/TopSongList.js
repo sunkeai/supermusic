@@ -4,7 +4,7 @@ class TopSongList extends React.Component{
     render(){
         return(
             <div>
-                最新音乐，接口/top/song？type
+                最新音乐列表，接口/top/song？type
             </div>
         )
     }

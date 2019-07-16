@@ -8,8 +8,8 @@ class TopMusic extends React.Component{
     constructor(){
         super();
         this.state={
-            recommend:[],
-            listen:[]
+            recommend:[],//获取数据列表
+            listen:[]//收听人数单位万
         }
     }
     componentWillMount() {
@@ -29,8 +29,6 @@ class TopMusic extends React.Component{
                         })
                     })
                 }
-                console.log(this.state.recommend);
-                console.log(this.state.listen);
             })
     }
     render(){
@@ -50,7 +48,7 @@ class TopMusic extends React.Component{
                                     <li style={{width:'30%',float:'left',margin:'8px 6px',position:'relative'}} key={i}>
                                         <NavLink to={
                                             {
-                                                pathname:'/top/play/highquality',
+                                                pathname:'/playlist/detail',
                                                 state:{
                                                     id:v.id
                                                 }

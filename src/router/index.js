@@ -1,14 +1,16 @@
-import top from "./top";
 import account from './login'
 import Find from "../views/find/Find";
 import Video from "../views/video/Video";
 import Mine from "../views/mine/Mine";
 import Friend from "../views/mine/Mine";
 import Account from "../views/account/Account";
+import playlist from "./playlist";
+import song from "./song";
 
 export default [
-    ...top,
     ...account,
+    ...playlist,
+    ...song,
     {
         path:"/",
         exact:true,

@@ -16,27 +16,18 @@ class FindVideo extends React.Component{
         this.findListCB=this.findListCB.bind(this)
     }
      findListCB(result){
-         console.log(result);
          result.forEach((v,i)=>{
-             console.log(v.type)
              if(v.videoId){
-                 console.log(222,v.videoId);
                  this.state.videoIdArr[i] = v.videoId
              }
          })
-        /*this.setState({
-            videoIdArr:result.map(v=>v.videoId)
-        });*/
         let arr=[];
         this.state.videoIdArr.forEach((v,i)=>{
-            console.log(v);
             axios.get('http://swmonk.top:3000/video/url?id='+v).then(({data})=>{
                 arr[i]=data.urls[0].url;
-                console.log(data.urls[0].url)
                 this.setState({
                     videoUrlArr:arr
-                })
-                // console.log(this.state.videoUrlArr)
+                },()=> console.log(this.state.videoUrlArr))
             })
         })
      }

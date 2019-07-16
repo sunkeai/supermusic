@@ -4,15 +4,6 @@ import { List, InputItem } from 'antd-mobile';
 import phoneLoginCreate from '../../store/actionCreators/login/phoneLogin'
 import Back from '../../components/common/Back'
 class PhoneLogin extends React.Component {
-    constructor(){
-        super();
-        this.state={
-
-        }
-    }
-    componentDidMount() {
-        // this.autoFocusInst.focus();
-    }
     render() {
         return (
             <div>
@@ -40,7 +31,6 @@ class PhoneLogin extends React.Component {
     }
 }
 function mapStateToProps(state){
-    console.log(111,state)
     return {
         Logincode: state.code,
     }
