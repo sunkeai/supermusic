@@ -2,7 +2,7 @@ import MusicListDetail from '../views/find/MusicListDetail'
 import TopMusicList from "../views/find/TopMusicList";
 export default[
     {
-        path:"/top/playlist/highquality",
+        path:"/top/playlist",
         exact:true,
         component:TopMusicList,
         nameStr:"获取歌单（默认cat=全部）",

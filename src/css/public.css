@@ -206,6 +206,7 @@ footer  .b-bottom{
     display: flex;
     justify-content: space-between;
     margin:15px 5px;
+    font-size:20px;
 }
 .Top-Music-Menu-All>div:nth-child(1){
     border:1px solid #999;
@@ -213,9 +214,11 @@ footer  .b-bottom{
     padding:3px 8px;
     display: inline-block;
 }
-.Top-Music-Menu-All div:nth-child(2) div {
+.Top-Music-Menu-All>div:nth-child(2) p {
     float: left;
     margin: 0 10px;
+    display: inline-block;
+    line-height:36px;
 }
 /***********************************************帐号页面*********************************/
 .account-top{

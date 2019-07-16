@@ -9,7 +9,7 @@ import FindVideo from "../../components/find/FindVideo";
 export default class Person extends Component{
     render() {
         return(
-            <div style={{width:'100%'}}>
+            <div style={{width:'100%',background:'#fff'}}>
                 <Paint></Paint>
                 <ChangeType></ChangeType>
                 <TopMusic></TopMusic>

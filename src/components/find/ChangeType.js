@@ -16,7 +16,7 @@ class ChangeType extends React.Component{
                         <div>歌曲</div>
                     </div>
                 </NavLink>
-                <NavLink to={'/top/playlist/highquality'} exact className='person-change-type' style={{display: 'block'}}>
+                <NavLink to={'/top/playlist'} exact className='person-change-type' style={{display: 'block'}}>
                     <div>
                         <span className='iconfont change-type-icon'>&#xe90b;</span>
                         <div>歌单</div>

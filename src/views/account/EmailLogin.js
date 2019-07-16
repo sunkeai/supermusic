@@ -6,7 +6,7 @@ import Back from '../../components/common/Back'
 class PhoneLogin extends React.Component {
     componentDidMount() {
         // this.autoFocusInst.focus();
-        console.log(this.props);
+        // console.log(this.props);
     }
     render() {
         return (
@@ -37,14 +37,12 @@ class PhoneLogin extends React.Component {
 function mapStateToProps(state){
     console.log(state);
     return {
-        loginCode:state.code,
+        loginCode:state.login.emailLogin.emailCode,
     }
 }
 function mapDispatchToProps(dispatch){
-    // console.log(222,dispatch);
     return {
         getEmail(){
-            // console.log(11111111,this);
             dispatch(emailLoginCreate.getEmail(this.refs.emailNum.state.value,this.refs.passWord.state.value))
         }
 
